@@ -25,7 +25,7 @@ int main()
 		std::cout << "\n";
 	}
 
-	
+	std::cout << "ИГООООООООООООООООООООРЬ";
 
 	return 0;
 
