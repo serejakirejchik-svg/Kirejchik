@@ -8,24 +8,69 @@ int main()
 	SetConsoleOutputCP(CP_UTF8);
 	srand(time(NULL));
 
-	const int row = 3, col = 4;
-	int arr[row][col];
-	
+	// 1 Задание
+	std::cout << "\t\tСчастливый билет:\n\n";
 
-	arr[0][0] = 100;
-	std::cout << "\t\tМассив ранд. чисел\n\n";
+	int num = 0;
+	std::cout << "Введите 6-ти значное число: \n";
+	std::cin >> num;
 
-	for (int i = 0; i < row; i++)
+	if (num < 100000 || num > 999999)
 	{
-		for (int j = 0; j < col; j++)
-		{
-			arr[i][j] = rand() % 10;
-			std::cout << arr[i][j] << " ";
-		}
-		std::cout << "\n";
+		std::cout << "Ошибка! Число не шестизначное\n";
+	}
+	int first = num / 1000;
+	int second = num % 1000;
+
+	
+	int sum1 = (first / 100) + ((first / 10) % 10) + (first % 10);
+
+	int sum2 = (second / 100) + ((second / 10) % 10) + (second % 10);
+
+	if (sum1 == sum2) 
+	{
+		std::cout << "Билет СЧАСТЛИВЫЙ!\n";
+	}
+	else 
+	{
+		std::cout << "Билет обычный\n";
 	}
 
-	std::cout << "ИГООООООООООООООООООООРЬ";
+	/*int num = 0;
+	std::cout << "Введите 4-ех значное число: \n";
+	std::cin >> num;
+
+	if (num >= 1000 || num <= 9999)
+	{
+		int a = num / 1000;
+		int b = (num / 100) % 10; 
+		int c = (num / 10) % 10; 
+		int v = num % 10;
+
+		int result = b * 1000 + a * 100 + v * 10 + c;
+		std::cout << "Результат: \n" << result;
+	}
+	else 
+	{
+	 std::cout << "Ошибка!! Введи 4-ех значное число";
+	}*/
+	// 2 Задание
+
+	/*	int a1, a2, a3, a4, a5, a6, a7;
+	std::cout << "Введите 7 целых чисел: \n";
+	std::cin >> a1 >> a2 >> a3 >> a4 >> a5 >> a6 >> a7;
+
+	int max_num = a1;
+
+	if (a2 > max_num) max_num = a2;
+	if (a3 > max_num) max_num = a3;
+	if (a4 > max_num) max_num = a4;
+	if (a5 > max_num) max_num = a5;
+	if (a6 > max_num) max_num = a6;
+	if (a7 > max_num) max_num = a7;
+
+	std::cout << "Максимальное число: " << max_num;*/
+	// 3 Задание
 
 	return 0;
 
@@ -100,13 +145,21 @@ int main()
 	{
 		std::cout << "Частное:\n\n" << a / b;
 	}
-	else if (v == '/' && b != 0)
+	else if (v == '/')
 	{
-		std::cout << "Частное:\n\n" << a / b;
+		if ( b == 0)
+		{
+			std::cout << "Частное:\n\n" << a / b;
+		}
+		else
+		{
+			std::cout << "Ошибка вычисления!\n";
+		}
 	}
 	else
 	{
 		std::cout << "Ошибка";
+	}
 	*/
 	/*
 
@@ -467,9 +520,87 @@ int main()
 	for (a; a < 0; a--)
 	{
 		std::cout << "Сумма всеъ отрицательных чисел: " << a << "\n";
+	}*//*long long factorial(int n)
+{
+	long long f = 1;
+	for (int i = 2; i <= n; i++) f *= i;
+	{
+		return f;
+	}
+}*/
+
+	/*	const int row = 3, col = 4;
+	int arr[row][col];
+	
+
+	arr[0][0] = 100;
+	std::cout << "\t\tМассив ранд. чисел\n\n";
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			arr[i][j] = rand() % 10;
+			std::cout << arr[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+
+	std::cout << "ИГООООООООООООООООООООРЬ";*/
+	/*	std::cout << "\t\tКалькулятор комбинаторики:\n\n";
+
+
+	std::string a;
+	int n = 0;
+	int k = 0;
+	int m = 0;
+	//Aп - с повторениями, А - без и т.д
+	std::cout << "Выберите тип задачи: \n";
+	std::cout << "1.A" << "\n2.Aп" << "\n3.C" << "\n4.Cп" << "\n5.P" << "\n6.Pп" << "\n"; 
+	std::cin >> a;
+	//Вводить надо цифру
+	if (a == "1")
+	{
+		std::cout << "Введите n и m:\n";
+		std::cin >> n >> m;
+		std::cout << "A:\n\n" << factorial(n) / factorial(n - m);
+		
+	}
+	else if (a == "2")
+	{
+		std::cout << "Введите n и m:\n";
+		std::cin >> n >> m;
+		std::cout << "Aп:\n\n" << std::pow(n, m);
+		
+	}
+	else if (a == "3")
+	{
+		std::cout << "Введите n и m:\n";
+		std::cin >> n >> m;
+		std::cout << "C:\n\n" << factorial(n) / (factorial(m) * factorial(n - m));
+	}
+	else if (a == "4")
+	{
+		std::cout << "Введите n и m:\n";
+		std::cin >> n >> m;
+		std::cout << "Cп:\n\n" << factorial(n + m - 1) / (factorial(m) * factorial(n - 1));
+	}
+	else if (a == "5")
+	{
+		std::cout << "Введите n: \n";
+		std::cin >> n;
+		std::cout << "P:\n\n" << factorial(n);
+	}
+	else if (a == "6")
+	{
+		std::cout << "Введите n и k: \n";
+		std::cin >> n >> k;
+		std::cout << "P:\n\n" << factorial(n) / (factorial(k) * factorial(n - k));
+	}
+	else
+	{
+		std::cout << "Ошибка!";
 	}*/
-
-
 
 
 
