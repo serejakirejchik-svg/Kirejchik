@@ -36,7 +36,8 @@ int main()
 		std::cout << "Билет обычный\n";
 	}
 
-	/*int num = 0;
+	// 2 Задание
+	int num = 0;
 	std::cout << "Введите 4-ех значное число: \n";
 	std::cin >> num;
 
@@ -53,10 +54,12 @@ int main()
 	else 
 	{
 	 std::cout << "Ошибка!! Введи 4-ех значное число";
-	}*/
-	// 2 Задание
+	}
+	
 
-	/*	int a1, a2, a3, a4, a5, a6, a7;
+
+	// 3 Задание
+	int a1, a2, a3, a4, a5, a6, a7;
 	std::cout << "Введите 7 целых чисел: \n";
 	std::cin >> a1 >> a2 >> a3 >> a4 >> a5 >> a6 >> a7;
 
@@ -70,7 +73,7 @@ int main()
 	if (a7 > max_num) max_num = a7;
 
 	std::cout << "Максимальное число: " << max_num;*/
-	// 3 Задание
+	
 
 	return 0;
 
