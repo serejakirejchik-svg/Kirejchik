@@ -72,7 +72,7 @@ int main()
 	if (a6 > max_num) max_num = a6;
 	if (a7 > max_num) max_num = a7;
 
-	std::cout << "Максимальное число: " << max_num;*/
+	std::cout << "Максимальное число: " << max_num;
 	
 
 	return 0;
