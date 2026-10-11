@@ -7,73 +7,99 @@ int main()
 	SetConsoleCP(CP_UTF8);
 	SetConsoleOutputCP(CP_UTF8);
 	srand(time(NULL));
+	//Задание 1 
+	const int size = 10;
 
-	// 1 Задание
-	std::cout << "\t\tСчастливый билет:\n\n";
+	int arr[size];
 
-	int num = 0;
-	std::cout << "Введите 6-ти значное число: \n";
-	std::cin >> num;
-
-	if (num < 100000 || num > 999999)
+	for (int a = 0; a < size; a++)
 	{
-		std::cout << "Ошибка! Число не шестизначное\n";
+		arr[a] = rand() % 10 + 1;
+		std::cout << arr[a] << " ";
 	}
-	int first = num / 1000;
-	int second = num % 1000;
-
+	std::cout << "\n\n";
 	
-	int sum1 = (first / 100) + ((first / 10) % 10) + (first % 10);
+	int min_num = arr[0];
+	int max_num = arr[0];
 
-	int sum2 = (second / 100) + ((second / 10) % 10) + (second % 10);
-
-	if (sum1 == sum2) 
+	for (int i = 1;i < size; i++)
 	{
-		std::cout << "Билет СЧАСТЛИВЫЙ!\n";
+		if (arr[i] < min_num) min_num = arr[i];
+		if (arr[i] > max_num) max_num = arr[i];
 	}
-	else 
+	std::cout << "\n\nМинимальное число: " << min_num << "\n";
+
+	std::cout << "Максимальное число: " << max_num << "\n";
+
+
+	//Задание 2 
+	const int size = 10;
+	int arr[size];
+	int min_num = 0;
+	int max_num = 0;
+
+	std::cout << "Введи порог(мин, макс (через пробел)):";
+	std::cin >> min_num >> max_num;
+
+	for (int i = 0; i < size; i++)
 	{
-		std::cout << "Билет обычный\n";
+		arr[i] =min_num + rand() % (max_num - min_num + 1);
+		std::cout << arr[i] << " ";
+	}
+	std::cout << "\n\n";
+
+	int porog;
+	std::cout << "Введите число (порог): ";
+	std::cin >> porog;
+	
+	int sum = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i] < porog)
+		{
+			sum += arr[i];
+		}
 	}
 
-	// 2 Задание
-	int num = 0;
-	std::cout << "Введите 4-ех значное число: \n";
-	std::cin >> num;
+	std::cout << "Сумма элементов меньше :" << porog << "\nравна: " << sum;
 
-	if (num >= 1000 || num <= 9999)
-	{
-		int a = num / 1000;
-		int b = (num / 100) % 10; 
-		int c = (num / 10) % 10; 
-		int v = num % 10;
 
-		int result = b * 1000 + a * 100 + v * 10 + c;
-		std::cout << "Результат: \n" << result;
-	}
-	else 
-	{
-	 std::cout << "Ошибка!! Введи 4-ех значное число";
+
+	//Задание 3
+	const int months = 12;
+
+	double firma[months];
+	std::cout << "Введите прибыль за год:";
+	for (int i = 0; i < months; i++) {
+		std::cout << "\nМесяц " << (i + 1) << ": ";
+		std::cin >> firma[i];
 	}
 	
+	int start_mon, end_mon;
+	std::cout << "\nВведите диапазон месяцев (начальный и конечный, от 1 до 12): ";
+	std::cin >> start_mon >> end_mon;
+
+	int start_idx = start_mon - 1;
+	int end_idx = end_mon - 1;
+
+	int best_max_month = start_idx;
+	int best_min_month = start_idx;
+
+	for (int i = start_idx + 1; i <= end_idx; i++) {
+		if (firma[i] > firma[best_max_month]) {
+			best_max_month = i;
+		}
+		if (firma[i] < firma[best_min_month]) {
+			best_min_month = i;
+		}
+	}
+
+	std::cout << "\n--- Результат в диапазоне с " << start_mon << "-го по " << end_mon << "-й месяц ---\n";
+	std::cout << "Максимальная прибыль: " << firma[best_max_month] << " (в " << (best_max_month + 1) << "-м месяце)\n";
+	std::cout << "Минимальная прибыль: " << firma[best_min_month] << " (в " << (best_min_month + 1) << "-м месяце)\n";
 
 
-	// 3 Задание
-	int a1, a2, a3, a4, a5, a6, a7;
-	std::cout << "Введите 7 целых чисел: \n";
-	std::cin >> a1 >> a2 >> a3 >> a4 >> a5 >> a6 >> a7;
-
-	int max_num = a1;
-
-	if (a2 > max_num) max_num = a2;
-	if (a3 > max_num) max_num = a3;
-	if (a4 > max_num) max_num = a4;
-	if (a5 > max_num) max_num = a5;
-	if (a6 > max_num) max_num = a6;
-	if (a7 > max_num) max_num = a7;
-
-	std::cout << "Максимальное число: " << max_num;
-	
 
 	return 0;
 
@@ -83,7 +109,7 @@ int main()
 
 
 	/* тип_данных имя_переменной
-	*/
+	тип_данных имя_переменной
 	/*std::cout << "Серега\n";
 		std::cout << "\tЧтобы есть\n";
 		std::cout << "\t\tЧтобы просить попить\n";
@@ -605,7 +631,73 @@ int main()
 		std::cout << "Ошибка!";
 	}*/
 
+//циклы
+/*	// 1 Задание
+	std::cout << "\t\tСчастливый билет:\n\n";
 
+	int num = 0;
+	std::cout << "Введите 6-ти значное число: \n";
+	std::cin >> num;
+
+	if (num < 100000 || num > 999999)
+	{
+		std::cout << "Ошибка! Число не шестизначное\n";
+	}
+	int first = num / 1000;
+	int second = num % 1000;
+
+	
+	int sum1 = (first / 100) + ((first / 10) % 10) + (first % 10);
+
+	int sum2 = (second / 100) + ((second / 10) % 10) + (second % 10);
+
+	if (sum1 == sum2) 
+	{
+		std::cout << "Билет СЧАСТЛИВЫЙ!\n";
+	}
+	else 
+	{
+		std::cout << "Билет обычный\n";
+	}
+
+	// 2 Задание
+	int num = 0;
+	std::cout << "Введите 4-ех значное число: \n";
+	std::cin >> num;
+
+	if (num >= 1000 || num <= 9999)
+	{
+		int a = num / 1000;
+		int b = (num / 100) % 10; 
+		int c = (num / 10) % 10; 
+		int v = num % 10;
+
+		int result = b * 1000 + a * 100 + v * 10 + c;
+		std::cout << "Результат: \n" << result;
+	}
+	else 
+	{
+	 std::cout << "Ошибка!! Введи 4-ех значное число";
+	}
+	
+
+
+	// 3 Задание
+	int a1, a2, a3, a4, a5, a6, a7;
+	std::cout << "Введите 7 целых чисел: \n";
+	std::cin >> a1 >> a2 >> a3 >> a4 >> a5 >> a6 >> a7;
+
+	int max_num = a1;
+
+	if (a2 > max_num) max_num = a2;
+	if (a3 > max_num) max_num = a3;
+	if (a4 > max_num) max_num = a4;
+	if (a5 > max_num) max_num = a5;
+	if (a6 > max_num) max_num = a6;
+	if (a7 > max_num) max_num = a7;
+
+	std::cout << "Максимальное число: " << max_num;
+	*/
 
 
 
