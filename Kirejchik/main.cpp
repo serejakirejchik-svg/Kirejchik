@@ -1,6 +1,102 @@
 #include <iostream>
 #include <Windows.h>
 
+//1 Задание
+const int size = 12;
+int MONTH[size]{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+bool isLeap(int year)
+{
+	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int Data(int day, int month, int year, int day1, int month1, int year1)
+{
+	if (year > year1 || (year == year1 && month > month1) || (year == year1 && month == month1 && day > day1))
+	{
+		std::swap(day, day1);
+		std::swap(month, month1);
+		std::swap(year, year1);
+	}
+	int daysCount = 0;
+		while (day != day1 || month != month1 || year != year1)
+		{
+			int maxDays = MONTH[month - 1];
+			if (month == 2 && isLeap(year))
+			{
+				maxDays = 29;
+			}
+			day++;
+			daysCount++;
+
+			if (day > maxDays)
+			{
+				day = 1;     
+				month++;      
+			}
+
+			if (month > 12) 
+			{
+				month = 1;    
+				year++;      
+			}
+		}
+
+	return daysCount;
+}
+
+// 2 Задание
+const int size = 5;
+int arr[size]{4, 3, 6, 5, 1};
+
+double Arif(int arr[], int size)
+{
+	double sum = 0;
+	for (int i = 0; i < size; i++)
+	{
+		sum += arr[i];
+	}
+	return sum / size;
+}
+
+// 3 Задание
+
+const int size = 10;
+int arr[size]{ 1, 2 ,3 , -1, -2, -3, -4, 0, 0, 0 };
+
+	void Kol(int arr[], int size)
+	{
+		int pol = 0;
+		int otr = 0;
+		int nol = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] > 0)
+			{
+				pol++;
+			}
+			else if (arr[i] < 0) 
+			{
+				otr++;            
+			}
+			else                 
+			{
+				nol++;           
+			}
+		}
+		std::cout << "Кол-во положительных элементов: " << pol << "\n";
+		std::cout << "Кол-во отрицательных элементов: " << otr << "\n";
+		std::cout << "Кол-во нулевых элементов: " << nol << "\n";
+	}
+
+
 int main()
 {
 
@@ -8,317 +104,32 @@ int main()
 	SetConsoleOutputCP(CP_UTF8);
 	srand(time(NULL));
 
+	// 1 Задание
+	
+	int day = 0;
+	int month = 0; 
+	int year = 0; 
+	int day1 = 0; 
+	int month1 = 0; 
+	int year1 = 0;
 
 
+	std::cout << "Введите 1 дату(через пробел):" << "\n";
+	std::cin >> day >> month >> year;
+	std::cout << "Введите 2 дату(через пробел):" << "\n";
+	std::cin >> day1 >> month1 >> year1;
 
-	int сhoose = 0;
-	int choose = 0;
-	int korzina = 0;
-	int number = 0;
-	int choose_drink = 0;
-	int apple = 90, orange = 110, apricos = 100, grusha = 140;
-	int tomato = 80, onion = 90, cucumber = 110;
-	int garlic = 80, petrushka = 70;
-	double sumKor = 0;
-	int hawthorn = 200;
-	bool fruitBought = false;
-	bool hawthornBought = false;
-	int hawthornSum = 0;
-	int cost = 0;
+	std::cout << Data(day, month, year, day1, month1, year1);
 
 
-
-	while (true)
-	{
-		system("cls");
-		std::cout << "\t\t Магазин Севы\n";
-		std::cout << "1 - Категории\n";
-		std::cout << "2 - Общая сумма корзины\n";
-		std::cout << "0 - Выход из магазина\n\n";
-		std::cout << "Ввод: ";
-		std::cin >> сhoose;
-
-		if (сhoose == 1)
-		{
-			while (true)
-			{
-				system("cls");
-				std::cout << "\t\t Выберите категорию\n\n";
-				std::cout << "1 - Фруктовый\n";
-				std::cout << "2 - Овощной\n";
-				std::cout << "3 - Чай\n\n";
-				std::cout << "4 - Настойки\n";
-				std::cout << "0 - Выход \n";
-				std::cout << "Ввод: ";
-				std::cin >> сhoose;
+	// 2 Задание
+	std::cout << "Среднее Арифметическое:" << Arif(arr, size);
 
 
-				if (сhoose == 1)
-				{
-					int fruit = 0;
-
-					system("cls");
-					std::cout << "\t\t Выбрана категория фруктовый\n\n\n";
-					std::cout << "1 - Яблочный\n";
-					std::cout << "2 - Апельсиновый\n";
-					std::cout << "3 - Абрикосовый\n";
-					std::cout << "4 - Грушевый \n";
-					std::cout << "0 - Выход к выбору категории \n\n";
-					std::cout << "Ввод: ";
-					std::cin >> choose_drink;
-					if (choose_drink == 1)
-					{
-						std::cout << "Литр Яблочного сока стоит: 90 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Яблочного сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (apple * number);
-							fruit++;
-							break;
-
-						}
-					}
-					if (choose_drink == 2)
-					{
-						std::cout << "Литр Апельсинового сока стоит: 110 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Апелсинового сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (orange * number);
-							fruit++;
-							break;
-						}
-					}
-					if (choose_drink == 3)
-					{
-						std::cout << "Литр Абрикосового сока стоит: 100 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Абрикосового сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (apricos * number);
-							fruit++;
-							break;
-						}
-					}
-					if (choose_drink == 4)
-					{
-						std::cout << "Литр Грушевого сока стоит: 140 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Грушевого сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (grusha * number);
-							fruit++;
-							break;
-						}
-					}
-					if (fruit > 0 && !fruitBought)
-					{
-						fruitBought = true;
-
-						if (hawthornBought)
-						{
-							korzina -= hawthornSum;
-							hawthornBought = false;
-							hawthornSum = 0;
-
-							system("cls");
-							std::cout << "Покупка фруктового сока изъял боярышник\n";
-							std::cout << "Деньги за настойку возвращены в корзину\n";
-							std::cout << "Боярышник больше недоступен для покупки\n";
-							Sleep(1500);
-						}
-						else
-						{
-							std::cout << "\nВнимание! После покупки фруктового сока боярышник недоступен.\n";
-							Sleep(1500);
-						}
-					}
-				}
-
-				else if (сhoose == 2)
-				{
-					system("cls");
-					std::cout << "\t\t Выбрана категория овощной\n\n";
-					std::cout << "1 - Томатный\n";
-					std::cout << "2 - Луковый\n";
-					std::cout << "3 - Огуречный\n";
-					std::cout << "0 - Выход к выбору категории \n\n";
-					std::cout << "Ввод: ";
-					std::cin >> choose_drink;
-					if (choose_drink == 1)
-					{
-						std::cout << "Литр Томатного сока стоит: 80 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Томатного сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (tomato * number);
-							break;
-						}
-					}
-
-					if (choose_drink == 2)
-					{
-						std::cout << "Литр Лукового сока стоит: 90 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Лукового сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							int FreeLiter = number / 4;
-							korzina = korzina + (onion * number);
-							korzina = korzina - (FreeLiter * onion);
-							if (FreeLiter > 0)
-							{
-								std::cout << "Вам подарок: " << FreeLiter << " л бесплатно!\n";
-							}
-							else
-							{
-								std::cout << "Скидки нет (нужно минимум 4 литра).\n";
-							}
-							Sleep(1500);
-							break;
-						}
-					}
-
-					if (choose_drink == 3)
-					{
-						std::cout << "Литр Огуречного сока стоит: 110 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Огуречного сока?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (cucumber * number);
-							break;
-						}
-					}
-				}
-
-				else if (сhoose == 3)
-				{
-					system("cls");
-					std::cout << "\t\t Выбрана категория Чай\n\n";
-					std::cout << "1 - Чесночный\n";
-					std::cout << "2 - Петрушевый\n";
-					std::cout << "0 - Выход к выбору категории \n\n";
-					std::cout << "Ввод: ";
-					std::cin >> choose_drink;
-					if (choose_drink == 1)
-					{
-						std::cout << "Литр Чесночного чая стоит: 80 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров Чесночного чая?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (garlic * number);
-							break;
-						}
-					}
-					if (choose_drink == 2)
-					{
-						std::cout << "Литр Петрушевого чая стоит: 70 рублей\n\n";
-						while (true)
-						{
-							std::cout << "Сколько хотите взять литров петрушевого чая?\n";
-							std::cout << "Ввод: ";
-							std::cin >> number;
-							korzina = korzina + (petrushka * number);
-							if (number >= 3)
-							{
-								korzina += (petrushka * number) * 0.95;
-								std::cout << "Вам предоставлена скидка 5% на петрушевый чай\n";
-							}
-							else
-							{
-								korzina += petrushka * number;
-							}
-							Sleep(1500);
-							break;
-						}
-					}
-				}
-
-				else if (сhoose == 4)
-				{
-					system("cls");
-					std::cout << "\t\t Выбрана категория Настойки\n\n";
-					std::cout << "1 - Боярышник\n";
-					std::cout << "0 - Выход к выбору категории\n\n";
-					std::cout << "Ввод: ";
-					std::cin >> choose_drink;
-					if (choose_drink == 1)
-					{
-						if (fruitBought)
-						{
-							std::cout << "\nБоярышник недоступен, потому что вы уже купили фруктовый сок!!!\n";
-							Sleep(1500);
-							break;
-						}
-						else
-						{
-							std::cout << "Литр настойки Боярышник стоит: 200 рублей\n\n";
-							while (true)
-							{
-								std::cout << "Сколько хотите взять литров Боярышника?\n";
-								std::cout << "Ввод: ";
-								std::cin >> number;
-								cost = hawthorn * number;
-								korzina += cost;
-								hawthornSum += cost;
-								hawthornBought = true;
-								break;
-							}
-						}
-					}
-				}
-				else if (сhoose == 0)
-				{
-					break;
-				}
-				else
-				{
-					std::cout << "\nНекорректный ввод\n";
-					Sleep(1500);
-				}
-			}
-		}
-		else if (сhoose == 2)
-		{
-			if (korzina > 1000)
-			{
-				sumKor = korzina * 0.87;
-				std::cout << "Вам предоставлена скидка 13% на весь чек\n";
-				std::cout << "Общая сумма что находиться в корзине: " << sumKor << " руб";
-			}
-			else
-			{
-				std::cout << "Общая сумма что находиться в корзине: " << korzina << " руб";
-			}
-			break;
-		}
-
-		else if (сhoose == 0)
-		{
-			std::cout << "\t\t Спасибо что зашли! Приходите ещё!\n\n";
-			break;
-		}
-		else
-		{
-			std::cout << "\nНекорректный ввод\n";
-			Sleep(1500);
-		}
-	}
+	// 3 Заданиe
+	Kol(arr, size);
+	
+	
 
 	return 0;
 }
@@ -1006,7 +817,315 @@ int main()
 	std::cout << "\n--- Результат в диапазоне с " << start_mon << "-го по " << end_mon << "-й месяц ---\n";
 	std::cout << "Максимальная прибыль: " << firma[best_max_month] << " (в " << (best_max_month + 1) << "-м месяце)\n";
 	std::cout << "Минимальная прибыль: " << firma[best_min_month] << " (в " << (best_min_month + 1) << "-м месяце)\n";*/
+//магаз
+/*int сhoose = 0;
+	int choose = 0;
+	int korzina = 0;
+	int number = 0;
+	int choose_drink = 0;
+	int apple = 90, orange = 110, apricos = 100, grusha = 140;
+	int tomato = 80, onion = 90, cucumber = 110;
+	int garlic = 80, petrushka = 70;
+	double sumKor = 0;
+	int hawthorn = 200;
+	bool fruitBought = false;
+	bool hawthornBought = false;
+	int hawthornSum = 0;
+	int cost = 0;
 
+
+
+	while (true)
+	{
+		system("cls");
+		std::cout << "\t\t Магазин Севы\n";
+		std::cout << "1 - Категории\n";
+		std::cout << "2 - Общая сумма корзины\n";
+		std::cout << "0 - Выход из магазина\n\n";
+		std::cout << "Ввод: ";
+		std::cin >> сhoose;
+
+		if (сhoose == 1)
+		{
+			while (true)
+			{
+				system("cls");
+				std::cout << "\t\t Выберите категорию\n\n";
+				std::cout << "1 - Фруктовый\n";
+				std::cout << "2 - Овощной\n";
+				std::cout << "3 - Чай\n\n";
+				std::cout << "4 - Настойки\n";
+				std::cout << "0 - Выход \n";
+				std::cout << "Ввод: ";
+				std::cin >> сhoose;
+
+
+				if (сhoose == 1)
+				{
+					int fruit = 0;
+
+					system("cls");
+					std::cout << "\t\t Выбрана категория фруктовый\n\n\n";
+					std::cout << "1 - Яблочный\n";
+					std::cout << "2 - Апельсиновый\n";
+					std::cout << "3 - Абрикосовый\n";
+					std::cout << "4 - Грушевый \n";
+					std::cout << "0 - Выход к выбору категории \n\n";
+					std::cout << "Ввод: ";
+					std::cin >> choose_drink;
+					if (choose_drink == 1)
+					{
+						std::cout << "Литр Яблочного сока стоит: 90 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Яблочного сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (apple * number);
+							fruit++;
+							break;
+
+						}
+					}
+					if (choose_drink == 2)
+					{
+						std::cout << "Литр Апельсинового сока стоит: 110 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Апелсинового сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (orange * number);
+							fruit++;
+							break;
+						}
+					}
+					if (choose_drink == 3)
+					{
+						std::cout << "Литр Абрикосового сока стоит: 100 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Абрикосового сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (apricos * number);
+							fruit++;
+							break;
+						}
+					}
+					if (choose_drink == 4)
+					{
+						std::cout << "Литр Грушевого сока стоит: 140 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Грушевого сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (grusha * number);
+							fruit++;
+							break;
+						}
+					}
+					if (fruit > 0 && !fruitBought)
+					{
+						fruitBought = true;
+
+						if (hawthornBought)
+						{
+							korzina -= hawthornSum;
+							hawthornBought = false;
+							hawthornSum = 0;
+
+							system("cls");
+							std::cout << "Покупка фруктового сока изъял боярышник\n";
+							std::cout << "Деньги за настойку возвращены в корзину\n";
+							std::cout << "Боярышник больше недоступен для покупки\n";
+							Sleep(1500);
+						}
+						else
+						{
+							std::cout << "\nВнимание! После покупки фруктового сока боярышник недоступен.\n";
+							Sleep(1500);
+						}
+					}
+				}
+
+				else if (сhoose == 2)
+				{
+					system("cls");
+					std::cout << "\t\t Выбрана категория овощной\n\n";
+					std::cout << "1 - Томатный\n";
+					std::cout << "2 - Луковый\n";
+					std::cout << "3 - Огуречный\n";
+					std::cout << "0 - Выход к выбору категории \n\n";
+					std::cout << "Ввод: ";
+					std::cin >> choose_drink;
+					if (choose_drink == 1)
+					{
+						std::cout << "Литр Томатного сока стоит: 80 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Томатного сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (tomato * number);
+							break;
+						}
+					}
+
+					if (choose_drink == 2)
+					{
+						std::cout << "Литр Лукового сока стоит: 90 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Лукового сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							int FreeLiter = number / 4;
+							korzina = korzina + (onion * number);
+							korzina = korzina - (FreeLiter * onion);
+							if (FreeLiter > 0)
+							{
+								std::cout << "Вам подарок: " << FreeLiter << " л бесплатно!\n";
+							}
+							else
+							{
+								std::cout << "Скидки нет (нужно минимум 4 литра).\n";
+							}
+							Sleep(1500);
+							break;
+						}
+					}
+
+					if (choose_drink == 3)
+					{
+						std::cout << "Литр Огуречного сока стоит: 110 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Огуречного сока?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (cucumber * number);
+							break;
+						}
+					}
+				}
+
+				else if (сhoose == 3)
+				{
+					system("cls");
+					std::cout << "\t\t Выбрана категория Чай\n\n";
+					std::cout << "1 - Чесночный\n";
+					std::cout << "2 - Петрушевый\n";
+					std::cout << "0 - Выход к выбору категории \n\n";
+					std::cout << "Ввод: ";
+					std::cin >> choose_drink;
+					if (choose_drink == 1)
+					{
+						std::cout << "Литр Чесночного чая стоит: 80 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров Чесночного чая?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (garlic * number);
+							break;
+						}
+					}
+					if (choose_drink == 2)
+					{
+						std::cout << "Литр Петрушевого чая стоит: 70 рублей\n\n";
+						while (true)
+						{
+							std::cout << "Сколько хотите взять литров петрушевого чая?\n";
+							std::cout << "Ввод: ";
+							std::cin >> number;
+							korzina = korzina + (petrushka * number);
+							if (number >= 3)
+							{
+								korzina += (petrushka * number) * 0.95;
+								std::cout << "Вам предоставлена скидка 5% на петрушевый чай\n";
+							}
+							else
+							{
+								korzina += petrushka * number;
+							}
+							Sleep(1500);
+							break;
+						}
+					}
+				}
+
+				else if (сhoose == 4)
+				{
+					system("cls");
+					std::cout << "\t\t Выбрана категория Настойки\n\n";
+					std::cout << "1 - Боярышник\n";
+					std::cout << "0 - Выход к выбору категории\n\n";
+					std::cout << "Ввод: ";
+					std::cin >> choose_drink;
+					if (choose_drink == 1)
+					{
+						if (fruitBought)
+						{
+							std::cout << "\nБоярышник недоступен, потому что вы уже купили фруктовый сок!!!\n";
+							Sleep(1500);
+							break;
+						}
+						else
+						{
+							std::cout << "Литр настойки Боярышник стоит: 200 рублей\n\n";
+							while (true)
+							{
+								std::cout << "Сколько хотите взять литров Боярышника?\n";
+								std::cout << "Ввод: ";
+								std::cin >> number;
+								cost = hawthorn * number;
+								korzina += cost;
+								hawthornSum += cost;
+								hawthornBought = true;
+								break;
+							}
+						}
+					}
+				}
+				else if (сhoose == 0)
+				{
+					break;
+				}
+				else
+				{
+					std::cout << "\nНекорректный ввод\n";
+					Sleep(1500);
+				}
+			}
+		}
+		else if (сhoose == 2)
+		{
+			if (korzina > 1000)
+			{
+				sumKor = korzina * 0.87;
+				std::cout << "Вам предоставлена скидка 13% на весь чек\n";
+				std::cout << "Общая сумма что находиться в корзине: " << sumKor << " руб";
+			}
+			else
+			{
+				std::cout << "Общая сумма что находиться в корзине: " << korzina << " руб";
+			}
+			break;
+		}
+
+		else if (сhoose == 0)
+		{
+			std::cout << "\t\t Спасибо что зашли! Приходите ещё!\n\n";
+			break;
+		}
+		else
+		{
+			std::cout << "\nНекорректный ввод\n";
+			Sleep(1500);
+		}
+	}*/
 
 
 
