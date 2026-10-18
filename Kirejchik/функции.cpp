@@ -130,6 +130,5 @@ int main()
 	Kol(arr, size);
 	
 	
-
 	return 0;
 }
