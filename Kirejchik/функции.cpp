@@ -128,7 +128,7 @@ int main()
 
 	// 3 Заданиe
 	Kol(arr, size);
-	
+
 	
 	return 0;
 }
