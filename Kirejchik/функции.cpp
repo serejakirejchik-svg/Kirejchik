@@ -1,6 +1,6 @@
 #include <iostream>
 #include <Windows.h>
-#include <algorithm>
+#include <algorithm> 
 
 // 1 Задание
 const int size1 = 12;
