@@ -1,9 +1,9 @@
 #include <iostream>
 #include <Windows.h>
-#include <algorithm>  // Добавлено для std::swap
+#include <algorithm>
 
 // 1 Задание
-const int size1 = 12;  // Переименовано
+const int size1 = 12;
 int MONTH[size1]{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 bool isLeap(int year)
@@ -54,8 +54,8 @@ int Data(int day, int month, int year, int day1, int month1, int year1)
 }
 
 // 2 Задание
-const int size2 = 5;  // Переименовано
-int arr2[size2]{4, 3, 6, 5, 1};  // Переименовано
+const int size2 = 5; 
+int arr2[size2]{4, 3, 6, 5, 1};
 
 double Arif(int arr[], int size)
 {
@@ -68,8 +68,8 @@ double Arif(int arr[], int size)
 }
 
 // 3 Задание
-const int size3 = 10;  // Переименовано
-int arr3[size3]{ 1, 2, 3, -1, -2, -3, -4, 0, 0, 0 };  // Переименовано
+const int size3 = 10; 
+int arr3[size3]{ 1, 2, 3, -1, -2, -3, -4, 0, 0, 0 }; 
 
 void Kol(int arr[], int size)
 {
@@ -116,10 +116,10 @@ int main()
 
     std::cout << Data(day, month, year, day1, month1, year1) << std::endl;
 
-    // 2 Задание - используем arr2 и size2
+    // 2 Задание
     std::cout << "Среднее Арифметическое: " << Arif(arr2, size2) << std::endl;
 
-    // 3 Задание - используем arr3 и size3
+    // 3 Задание
     Kol(arr3, size3);
 
     return 0;
