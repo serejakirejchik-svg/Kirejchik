@@ -1,139 +1,158 @@
 #include <iostream>
 #include <Windows.h>
+#include <cmath>
 
-//1 Задание
-const int size = 12;
-int MONTH[size]{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-bool isLeap(int year)
+void DinP(int size, int*& ptr)
 {
-	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-int Data(int day, int month, int year, int day1, int month1, int year1)
-{
-	if (year > year1 || (year == year1 && month > month1) || (year == year1 && month == month1 && day > day1))
-	{
-		std::swap(day, day1);
-		std::swap(month, month1);
-		std::swap(year, year1);
-	}
-	int daysCount = 0;
-		while (day != day1 || month != month1 || year != year1)
-		{
-			int maxDays = MONTH[month - 1];
-			if (month == 2 && isLeap(year))
-			{
-				maxDays = 29;
-			}
-			day++;
-			daysCount++;
-
-			if (day > maxDays)
-			{
-				day = 1;     
-				month++;      
-			}
-
-			if (month > 12) 
-			{
-				month = 1;    
-				year++;      
-			}
-		}
-
-	return daysCount;
-}
-
-// 2 Задание
-const int size = 5;
-int arr[size]{4, 3, 6, 5, 1};
-
-double Arif(int arr[], int size)
-{
-	double sum = 0;
+	ptr = new int[size];
 	for (int i = 0; i < size; i++)
 	{
-		sum += arr[i];
+		std::cout << ptr + i << "\n";
 	}
-	return sum / size;
+}
+void DinM(int size, int*& ptr)
+{
+	for (int i = 0; i < size; i++)
+	{
+		ptr[i] = rand() % 10;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << ptr[i] << "\n";
+	}
+	
+	
 }
 
-// 3 Задание
-
-const int size = 10;
-int arr[size]{ 1, 2 ,3 , -1, -2, -3, -4, 0, 0, 0 };
-
-	void Kol(int arr[], int size)
+void DinPech(int size, int* ptr)
+{
+	for (int i = 0; i < size; i++)
 	{
-		int pol = 0;
-		int otr = 0;
-		int nol = 0;
-		for (int i = 0; i < size; i++)
-		{
-			if (arr[i] > 0)
-			{
-				pol++;
-			}
-			else if (arr[i] < 0) 
-			{
-				otr++;            
-			}
-			else                 
-			{
-				nol++;           
-			}
-		}
-		std::cout << "Кол-во положительных элементов: " << pol << "\n";
-		std::cout << "Кол-во отрицательных элементов: " << otr << "\n";
-		std::cout << "Кол-во нулевых элементов: " << nol << "\n";
+		std::cout << ptr[i] << "\n";
 	}
+}
+
+void DinUdal(int size, int*& ptr)
+{
+	delete[] ptr;
+	ptr = nullptr;
+}
+
+void DinDob(int& size, int*& ptr, int plus)
+{
+	int* arr = new int [size + 1];
+	
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = ptr[i];
+	}
+
+	arr[size] = plus;
+	delete[] ptr;
+
+	ptr = arr;
+
+	size++;
+ }
+
+void DinVstavka(int& size, int*& ptr, int newEL, int index)
+{
+	int* Rab = new int[size + 1];
+
+	for (int i = 0; i < index; i++)
+	{
+		Rab[i] = ptr[i];
+	}
+
+	Rab[index] = newEL;
+
+	for (int i = index; i < size; i++)
+	{
+		Rab[i + 1] = ptr[i];
+	}
+
+	delete[] ptr;
+	ptr = Rab;
+	size++;
+}
+
+void DinUdalIndex(int& size, int*& ptr, int index)
+{
+	int* Rab = new int[size - 1];
+
+	for (int i = 0; i < index; i++)
+	{
+		Rab[i] = ptr[i];
+	}
+
+	for (int i = index + 1; i < size; i++)
+	{
+		Rab[i - 1] = ptr[i];
+	}
+
+	delete[] ptr;
+	ptr = Rab;
+	size--;
+}
+
 
 
 int main()
 {
+	int index = 0;
+	int newEl = 0;
+	int plus = 0;
+	int size = 5;
+	int* ptr = nullptr;
 
 	SetConsoleCP(CP_UTF8);
 	SetConsoleOutputCP(CP_UTF8);
-	srand(time(NULL));
 
-	// 1 Задание
+	DinP(size, ptr);
+	std::cout << "\n";
+	DinM(size, ptr);
+	std::cout << "\n";
+	DinDob(size, ptr, 40);
+	std::cout << "\n\n";
+
+	DinVstavka(size, ptr, 40, 2);
+	DinPech(size, ptr);
+	std::cout << "\n\n";
+	DinUdalIndex(size, ptr, 2);
+	DinPech(size, ptr);
 	
-	int day = 0;
-	int month = 0; 
-	int year = 0; 
-	int day1 = 0; 
-	int month1 = 0; 
-	int year1 = 0;
-
-
-	std::cout << "Введите 1 дату(через пробел):" << "\n";
-	std::cin >> day >> month >> year;
-	std::cout << "Введите 2 дату(через пробел):" << "\n";
-	std::cin >> day1 >> month1 >> year1;
-
-	std::cout << Data(day, month, year, day1, month1, year1);
-
-
-	// 2 Задание
-	std::cout << "Среднее Арифметическое:" << Arif(arr, size);
-
-
-	// 3 Заданиe
-	Kol(arr, size);
+	DinUdal(size, ptr);
 	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	return 0;
-}
 
+
+}
 
 	/* тип_данных имя_переменной
 	тип_данных имя_переменной
@@ -1127,10 +1146,243 @@ int main()
 		}
 	}*/
 
+//функции
+ 
+//1 Задание(фун)
+/*const int size = 12;
+	int MONTH[size]{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	bool isLeap(int year)
+	{
+		if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	int Data(int day, int month, int year, int day1, int month1, int year1)
+	{
+		if (year > year1 || (year == year1 && month > month1) || (year == year1 && month == month1 && day > day1))
+		{
+			std::swap(day, day1);
+			std::swap(month, month1);
+			std::swap(year, year1);
+		}
+		int daysCount = 0;
+			while (day != day1 || month != month1 || year != year1)
+			{
+				int maxDays = MONTH[month - 1];
+				if (month == 2 && isLeap(year))
+				{
+					maxDays = 29;
+				}
+				day++;
+				daysCount++;
+
+				if (day > maxDays)
+				{
+					day = 1;     
+					month++;      
+				}
+
+				if (month > 12) 
+				{
+					month = 1;    
+					year++;      
+				}
+			}
+
+		return daysCount;
+	}*/
+// 1 Задание
+/*int day = 0;
+	int month = 0; 
+	int year = 0; 
+	int day1 = 0; 
+	int month1 = 0; 
+	int year1 = 0;
 
 
+	std::cout << "Введите 1 дату(через пробел):" << "\n";
+	std::cin >> day >> month >> year;
+	std::cout << "Введите 2 дату(через пробел):" << "\n";
+	std::cin >> day1 >> month1 >> year1;
+
+	std::cout << Data(day, month, year, day1, month1, year1);*/
+	
+
+// 2 Задание(фун)
+/*const int size = 5;
+int arr[size]{4, 3, 6, 5, 1};
+
+double Arif(int arr[], int size)
+{
+	double sum = 0;
+	for (int i = 0; i < size; i++)
+	{
+		sum += arr[i];
+	}
+	return sum / size;
+}*/
+// 2 Задание
+/*std::cout << "Среднее Арифметическое:" << Arif(arr, size);
+	*/
 
 
+// 3 Задание(фун)
+/*const int size = 10;
+int arr[size]{ 1, 2 ,3 , -1, -2, -3, -4, 0, 0, 0 };
+
+	void Kol(int arr[], int size)
+	{
+		int pol = 0;
+		int otr = 0;
+		int nol = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] > 0)
+			{
+				pol++;
+			}
+			else if (arr[i] < 0) 
+			{
+				otr++;            
+			}
+			else                 
+			{
+				nol++;           
+			}
+		}
+		std::cout << "Кол-во положительных элементов: " << pol << "\n";
+		std::cout << "Кол-во отрицательных элементов: " << otr << "\n";
+		std::cout << "Кол-во нулевых элементов: " << nol << "\n";
+	}*/
+// 3 Заданиe
+/*Kol(arr, size);
+	*/
+
+//адреса
+/*	const int size = 5;
+	int arr[size]{ 4,3, 6 ,7,4 };
+	
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << *(arr + i)<< "\n";
+	}*/
+
+/*	int a = 5;
+
+	int* px = &a;
+
+	std::cout << px << "\n"; // адрес
+	std::cout << *px << "\n"; // знач. переменной
+	*/
+
+// че то по вышке
+/*double f(double x) {
+	return log(x) - cos(x);
+}
+
+double df(double x) {
+	return 1.0 / x + sin(x);
+}*/
+/*	std::cout << "\t\t Ваше уравнение: \n\n";
+	std::cout << "f(x) = ln(x) - cos(x) = 0\n\n";
+
+	
+	double a = 0.5;
+	double h = 0.1;
+	double b;
+	double f_a = f(a);
+
+	while (a < 3.0)
+	{
+		b = a + h;
+		double f_b = f(b);
+
+		if (f_a * f_b < 0) {
+			std::cout << "Наш 1-ый подотрезок: [" << a << "; " << b << "]\n";
+			std::cout << "   f(" << a << ") = " << f_a << "\n";
+			std::cout << "   f(" << b << ") = " << f_b << "\n\n";
+			break;
+		}
+
+		a = b;
+		f_a = f_b;
+	}
+
+	double c;
+
+	for (int i = 1; i <= 3; i++) {
+		c = (a + b) / 2;
+		double f_c = f(c);
+		f_a = f(a);
+
+		std::cout << "Итерация " << i << ": c = " << c << "\n";
+
+		if (f_a * f_c < 0) {
+			b = c;
+		}
+		else {
+			a = c;
+		}
+	}
+
+	double x0 = (a + b) / 2;
+	std::cout << "Начальное приближение x0 = " << x0 << "\n\n";
+
+	double x = x0;
+	double eps = 1e-6;
+	int iter = 1;
+
+	while (true) {
+		double d = df(x);
+
+		if (fabs(d) < 1e-8) {
+			std::cout << "ВНИМАНИЕ: df(x) ≈ 0 при x = " << x << "\n";
+			break;
+		}
+
+		double xNext = x - f(x) / d;
+
+		std::cout << "Итерация " << iter << ": x = " << xNext
+			<< ", f(x) = " << f(xNext) << "\n";
+
+		if (fabs(xNext - x) < eps) {
+			x = xNext;
+			break;
+		}
+
+		x = xNext;
+		iter++;
+	}
+
+	std::cout << "\nКорень найден: x = " << x << ", f(x) = " << f(x) << "\n";
+
+	
+	Вопрос 1. Сколько раз вычислена f(x) за все три этапа?
+	
+	Ответ: 23 раза
+
+	
+	Вопрос 2. Почему не запустили Ньютон сразу на всём отрезке [0.5; 3.0] с x = 0.5?
+
+Ответ: метод Ньютона — локальный: он гарантированно сходится только тогда, когда начальная точка уже близка к корню. 
+Поэтому сначала корень локализуют сканированием и сужают бисекцией,
+и лишь потом уточняют Ньютоном.
+
+Что происходит с производной в точке x = 0.5:
+
+	df(0.5) = 1/0.5 + sin(0.5) (примерно)  2 + 0.479 = 2.48
+ 	
+
+	Вывод: без подготовленного начального приближения x0​
+	метод Ньютона ненадёжен - он может уйти за область определения, попасть в окрестность нуля производной или просто разойтись.
+	*/
 
 
 
